@@ -31,6 +31,7 @@ function App() {
       .catch(err => {
         setShowSkeleton(false);
         setErrorMessage('No data to show')
+        setData([])
         console.log(err.message)
       })
   }, []);
@@ -40,7 +41,7 @@ function App() {
       .then(res => {
 
         setShowUserSkeleton(false)
-        const  findData = res?.data
+        const findData = res?.data
         setEmail(findData?.profile?.email)
         setJobTitle(findData?.jobTitle)
         setBioData(findData?.Bio)
@@ -51,7 +52,7 @@ function App() {
         return setUser(findData);
       })
       .catch(err => {
-        
+
         console.log(err.message)
         return setShowUserSkeleton(false)
       });
@@ -63,7 +64,7 @@ function App() {
         <div className="row">
           <div className="col-md-6 px-4">
             <div className="bg-info py-3 px-2 fs-4 fw-bolder rounded">
-            USERS LISTS
+              USERS LISTS
             </div>
             <p className="text-danger mt-4 fs-3 fw-bolder">
               {errorMessage && errorMessage}
@@ -93,21 +94,28 @@ function App() {
                   {user?.profile?.username && <p className="mb-0 mt-2">
                     @{user?.profile?.username}
                   </p>}
-                  {user &&<Form className='mt-3'>
-                    <Form.Control className='fw-bold'
-                      as="textarea" defaultValue={bioData}
-                      style={{ height: '100px' }}
-                    />
-                    <Form.Group className="mb-3 mt-3" controlId="formBasicFullName">
-                      <Form.Control defaultValue={firstName + ' ' + lastName} readOnly className='fw-bold' type="text" />
-                    </Form.Group>
-                    <Form.Group className="mb-3 mt-3" controlId="formBasicJobTitle">
-                      <Form.Control defaultValue={userJobTitle} readOnly className='fw-bold' type="text" />
-                    </Form.Group>
-                    <Form.Group className="mb-3 mt-3" controlId="formBasicEmail">
-                      <Form.Control defaultValue={userEmail} readOnly className='fw-bold' type="email" />
-                    </Form.Group>
-                  </Form>}
+                  {user &&
+                    <Form className='mt-3 text-start '>
+                      <Form.Group>
+                      <Form.Label>Bio</Form.Label>
+                        <Form.Control
+                          as="textarea" defaultValue={bioData}
+                          style={{ height: '100px' }}
+                        />
+                      </Form.Group>
+                      <Form.Group className="mb-3 mt-3" controlId="formBasicFullName">
+                        <Form.Label>Full Name</Form.Label>
+                        <Form.Control defaultValue={firstName + ' ' + lastName} readOnly type="text" />
+                      </Form.Group>
+                      <Form.Group className="mb-3 mt-3" controlId="formBasicJobTitle">
+                        <Form.Label>Job Title</Form.Label>
+                        <Form.Control defaultValue={userJobTitle} readOnly type="text" />
+                      </Form.Group>
+                      <Form.Group className="mb-3 mt-3" controlId="formBasicEmail">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control defaultValue={userEmail} readOnly type="email" />
+                      </Form.Group>
+                    </Form>}
                 </div>
               }
               {userSkeletonShow && <UserDetailsSkeleton> </UserDetailsSkeleton>}
