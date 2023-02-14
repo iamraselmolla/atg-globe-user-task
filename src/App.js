@@ -62,65 +62,73 @@ function App() {
     <div className="App">
       <div className="container py-5">
         <div className="row">
-          <div className="col-md-6 px-4">
-            <div className="bg-info py-3 px-2 fs-4 fw-bolder rounded">
+          <div className="col-md-8 position-relative">
+            <div className="bg-black text-white py-3 px-2 position-sticky top-0 fs-4 fw-bolder rounded">
               USERS LISTS
             </div>
-            <p className="text-danger mt-4 fs-3 fw-bolder">
-              {errorMessage && errorMessage}
-            </p>
-            {!showSkeleton ? <ul className='mt-3 w-100 list-unstyled'>
+            {errorMessage &&
+              <p className="text-danger mt-4 fs-3 fw-bolder">
+                {errorMessage}
+              </p>}
+            {!showSkeleton ? <div className='mt-3 row'>
               {
                 allData?.map(singleUser =>
-                  <div key={singleUser?.profile.username} onClick={() => handleUserClick(singleUser?.id)} style={{ cursor: 'pointer' }} className='bg-light py-2 my-1 px-3 fw-bold gap-3 d-flex align-items-center'>
-                    {singleUser?.avatar && <img width="50" height="50" className='rounded-circle' src={singleUser?.avatar} alt="" />}
-                    <li>
-                      {singleUser?.profile.firstName + ' ' + singleUser?.profile.lastName}
-                    </li>
+                  <div key={singleUser?.profile.username} onClick={() => handleUserClick(singleUser?.id)} style={{ cursor: 'pointer' }} className='col-md-4 user-info fw-bold'>
+                    <div className="my-2  d-flex align-items-center gap-2 ps-2  py-3 bg-black text-white rounded">
+                      {singleUser?.avatar && <img width="50" height="50" className='rounded-circle' src={singleUser?.avatar} alt="" />}
+
+
+                      <p className='mb-0'>{singleUser?.profile.firstName + ' ' + singleUser?.profile.lastName}</p>
+                    </div>
+
                   </div>)
               }
-            </ul> : <>
+            </div> : <>
               <Skeleton style={{ height: '64px' }} count={8} />
             </>}
           </div>
-          <div className="col-md-5 offset-md-1 px-4 fw-bold position-relative">
+          <div className="col-md-4 px-4 fw-bold position-relative">
             <div className="position-sticky top-0">
-              <div className="bg-info py-3 px-2 fs-4 fw-bolder rounded">
+              <div className="bg-black text-white py-3 px-2 fs-4 fw-bolder rounded">
                 USERS DETAILS
               </div>
               {!userSkeletonShow && user &&
                 <div className="user_info">
-                  <img src={userImage} className="rounded-circle mt-3" alt="" />
-                  {user?.profile?.username && <p className="mb-0 mt-2">
+                  {userImage && <img src={userImage} className="rounded-circle mt-3" alt="" />}
+                  {user?.profile?.username && <p className="bg-black mb-0 mt-2 py-2 rounded text-white">
                     @{user?.profile?.username}
                   </p>}
                   {user &&
                     <Form className='mt-3 text-start '>
                       <Form.Group>
-                      <Form.Label>Bio</Form.Label>
-                        <Form.Control
+                        <Form.Label>Bio</Form.Label>
+                        <Form.Control className="bg-black text-white" readOnly
                           as="textarea" defaultValue={bioData}
                           style={{ height: '100px' }}
                         />
                       </Form.Group>
                       <Form.Group className="mb-3 mt-3" controlId="formBasicFullName">
                         <Form.Label>Full Name</Form.Label>
-                        <Form.Control defaultValue={firstName + ' ' + lastName} readOnly type="text" />
+                        <Form.Control className="bg-black text-white" defaultValue={firstName + ' ' + lastName} readOnly type="text" />
                       </Form.Group>
                       <Form.Group className="mb-3 mt-3" controlId="formBasicJobTitle">
                         <Form.Label>Job Title</Form.Label>
-                        <Form.Control defaultValue={userJobTitle} readOnly type="text" />
+                        <Form.Control className="bg-black text-white" defaultValue={userJobTitle} readOnly type="text" />
                       </Form.Group>
                       <Form.Group className="mb-3 mt-3" controlId="formBasicEmail">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control defaultValue={userEmail} readOnly type="email" />
+                        <Form.Control className="bg-black text-white" defaultValue={userEmail} readOnly type="email" />
                       </Form.Group>
                     </Form>}
                 </div>
               }
               {userSkeletonShow && <UserDetailsSkeleton> </UserDetailsSkeleton>}
 
-              {!user && !userSkeletonShow && <h2 className='text-info mt-3'>Please select user to see details</h2>}
+              {!user && !userSkeletonShow && <div className="d-flex flex-column mt-4">
+                <div><img src="search.png" alt="" /></div>
+                <p className='mb-0 fs-5 mt-2 text-black fw-bold'>Please select user to see details</p>
+              </div>
+              }
 
             </div>
           </div>
