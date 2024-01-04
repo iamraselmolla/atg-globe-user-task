@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 const UserDetailsForm = ({ firstName, lastName, bioData, userJobTitle, userEmail }) => {
     return (
         <Form className='mt-3 text-start '>
-            <Form.Group className="mb-3 mt-3" controlId="formBasicFullName">
+            <Form.Group className="mb-2 mt-2" controlId="formBasicFullName">
                 <Form.Label>Full Name</Form.Label>
                 <Form.Control className="border border-black" defaultValue={firstName + ' ' + lastName} readOnly
                     type="text" />
@@ -17,11 +17,11 @@ const UserDetailsForm = ({ firstName, lastName, bioData, userJobTitle, userEmail
                 />
             </Form.Group>
 
-            <Form.Group className="mb-3 mt-3" controlId="formBasicJobTitle">
+            <Form.Group className="mb-2 mt-2" controlId="formBasicJobTitle">
                 <Form.Label>Job Title</Form.Label>
                 <Form.Control className="border border-black" defaultValue={userJobTitle} readOnly type="text" />
             </Form.Group>
-            <Form.Group className="mb-3 mt-3" controlId="formBasicEmail">
+            <Form.Group className="mb-2 mt-2" controlId="formBasicEmail">
                 <Form.Label>Email</Form.Label>
                 <Form.Control className="border border-black" defaultValue={userEmail} readOnly type="email" />
             </Form.Group>

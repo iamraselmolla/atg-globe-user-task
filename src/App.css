@@ -36,6 +36,23 @@
     transform: rotate(360deg);
   }
 }
-.form_border{
-  border: solid 2px #000!important;
+.form_border {
+  border: solid 2px #000 !important;
+}
+
+.active {
+  transition: all ease-in 0.2s;
+  transform: scale(0.85);
+}
+
+.active .active_icon {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  background-color: green;
+  border-radius: 50%;
+  text-align: center;
+  position: absolute;
+  right: 0;
+  color: #ffffff;
 }
