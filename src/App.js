@@ -6,6 +6,9 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import UserDetailsSkeleton from './Components/UserDetailsSkeleton';
 import SingleUser from './Components/SingleUser';
+import SelectAnImage from './SelectAnImage';
+import Heading from './Components/Heading';
+import UserDetailsForm from './Components/UserDetailsForm';
 
 function App() {
   const [allData, setData] = useState([]);
@@ -83,9 +86,7 @@ function App() {
           </div>
           <div className="col-md-4 px-4 fw-bold position-relative">
             <div className="position-sticky top-0">
-              <div className="bg-black text-white py-3 px-2 fs-4 fw-bolder rounded">
-                USERS DETAILS
-              </div>
+              <Heading title={' USERS DETAILS'} />
               {!userSkeletonShow && user &&
                 <div className="user_info">
                   {userImage && <img src={userImage} className="rounded-circle mt-3" alt="" />}
@@ -93,36 +94,13 @@ function App() {
                     @{user?.profile?.username}
                   </p>}
                   {user &&
-                    <Form className='mt-3 text-start '>
-                      <Form.Group className="mb-3 mt-3" controlId="formBasicFullName">
-                        <Form.Label>Full Name</Form.Label>
-                        <Form.Control className="border border-black" defaultValue={firstName + ' ' + lastName} readOnly type="text" />
-                      </Form.Group>
-                      <Form.Group>
-                        <Form.Label>Bio</Form.Label>
-                        <Form.Control className="border border-black" readOnly
-                          as="textarea" defaultValue={bioData}
-                          style={{ height: '60px' }}
-                        />
-                      </Form.Group>
-
-                      <Form.Group className="mb-3 mt-3" controlId="formBasicJobTitle">
-                        <Form.Label>Job Title</Form.Label>
-                        <Form.Control className="border border-black" defaultValue={userJobTitle} readOnly type="text" />
-                      </Form.Group>
-                      <Form.Group className="mb-3 mt-3" controlId="formBasicEmail">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control className="border border-black" defaultValue={userEmail} readOnly type="email" />
-                      </Form.Group>
-                    </Form>}
+                    <UserDetailsForm bioData={bioData} firstName={firstName} lastName={lastName} userEmail={userEmail} userJobTitle={userJobTitle} />
+                  }
                 </div>
               }
-              {userSkeletonShow && <UserDetailsSkeleton> </UserDetailsSkeleton>}
+              {userSkeletonShow && <UserDetailsSkeleton />}
 
-              {!user && !userSkeletonShow && <div className="d-flex flex-column mt-4">
-                <div><img src="search.png" alt="" /></div>
-                <p className='mb-0 fs-5 mt-2 text-black fw-bold'>Please select user to see details</p>
-              </div>
+              {!user && !userSkeletonShow && <SelectAnImage />
               }
 
             </div>
